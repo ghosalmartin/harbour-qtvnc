@@ -22,10 +22,11 @@ INCLUDEPATH += \
                 src/ \
                 src/vnc \
                 libvncserver-i486/
+                libvncserver-i486/rfb
 
-#DEPENDPATH += $$PWD/libvncserver-i486 $$PWD/libvncserver-i486/rfb
+DEPENDPATH += $$PWD/libvncserver-i486 $$PWD/libvncserver-i486/rfb
 
-LIBS += -Llibvncserver-i486/libvncclient/.libs -lvncclient
+LIBS += -lz -L$$PWD/libvncserver-i486/libvncclient/.libs -lvncclient
 
 SOURCES += \
            src/harbour-qtvnc.cpp \
@@ -50,7 +51,7 @@ OTHER_FILES += qml/harbour-qtvnc.qml \
     libvncserver-i486/* \
     libvncserver-i486/rfb/* \
     libvncserver-i486/libvncclient/* \
-    llibvncserver-i486/libvncclient/.libs/*
+    libvncserver-i486/libvncclient/.libs/* \
 
 # to disable building translations every time, comment out the
 # following CONFIG line
