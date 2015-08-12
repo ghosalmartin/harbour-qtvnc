@@ -539,6 +539,7 @@ bool VncClientThread::clientCreate(bool reinitialising)
     cl->GetCredential = credentialHandlerStatic;
     cl->GotFrameBufferUpdate = updatefbStatic;
     cl->GotXCutText = cuttextStatic;
+
     rfbClientSetClientData(cl, 0, this);
 
     cl->serverHost = strdup(m_host.toUtf8().constData());

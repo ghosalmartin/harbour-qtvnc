@@ -32,23 +32,24 @@
 #include <QtQuick>
 #endif
 
-#include <sailfishapp.h>
+#include <QDebug>
 
+#include <sailfishapp.h>
+#include <vncview.h>
+
+#include <QApplication>
+#include <QUrl>
 
 int main(int argc, char *argv[])
 {
-    // SailfishApp::main() will display "qml/template.qml", if you need more
-    // control over initialization, you can use:
-    //
-    //   - SailfishApp::application(int, char *[]) to get the QGuiApplication *
-    //   - SailfishApp::createView() to get a new QQuickView * instance
-    //   - SailfishApp::pathTo(QString) to get a QUrl to a resource file
-    //
-    // To display the view, call "show()" (will show fullscreen on device).
+    QApplication app(argc, argv);
 
-    QGuiApplication *app = SailfishApp::application(argc, argv);
+    QUrl url("vnc://10.240.15.98");
 
-    int result = app->exec();
+    VncView vncView(0, url);
 
+    vncView.show();
+    vncView.start();
+    return app.exec();
 }
 
