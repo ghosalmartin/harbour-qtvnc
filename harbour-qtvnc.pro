@@ -14,7 +14,7 @@ TARGET = harbour-qtvnc
 
 DEFINES += QTONLY
 
-QT+= widgets
+QT+= widgets quick
 
 CONFIG += sailfishapp
 
@@ -32,12 +32,14 @@ SOURCES += \
            src/harbour-qtvnc.cpp \
            src/vnc/vncclientthread.cpp \
            src/vnc/vncview.cpp \
-           src/vnc/remoteview.cpp
+           src/vnc/remoteview.cpp \
+    src/vnc/testpainteditem.cpp
 
 HEADERS += \
            src/vnc/vncclientthread.h \
            src/vnc/vncview.h \
-           src/vnc/remoteview.h
+           src/vnc/remoteview.h \
+    src/vnc/testpainteditem.h
 
 OTHER_FILES += qml/harbour-qtvnc.qml \
     qml/cover/CoverPage.qml \

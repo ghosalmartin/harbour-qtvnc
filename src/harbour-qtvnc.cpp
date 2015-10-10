@@ -35,21 +35,52 @@
 #include <QDebug>
 
 #include <sailfishapp.h>
-#include <vncview.h>
+#include <testpainteditem.h>
 
 #include <QApplication>
 #include <QUrl>
 
+#include <QtQml/qqml.h>
+#include <QImage>
+extern "C" {
+#include <rfb/rfbclient.h>
+}
+
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
+    //QApplication app(argc, argv);
 
-    QUrl url("vnc://10.240.15.98");
+    QUrl url("vnc://192.168.2.7");
 
-    VncView vncView(0, url);
+    QGuiApplication *app = SailfishApp::application(argc, argv);
 
-    vncView.show();
-    vncView.start();
-    return app.exec();
+    app->setOrganizationName("harbour-qtvnc");
+    app->setApplicationName("harbour-qtvnc");
+
+    const QImage image(int x = 0, int y = 0, int w = 0, int h = 0);
+
+    rfbClient *cl;
+
+    cl = rfbGetClient(8, 3, 4);
+
+
+    rfbClientSetClientData(cl, 0, 0);
+
+    QString host("192.168.2.7");
+
+    cl->serverHost = strdup(host.toUtf8().constData());
+
+
+
+    qmlRegisterType<testpainteditem>("harbour.qtvnc.testpainteditem", 1, 0, "TestPaintedItem");
+
+
+    QQuickView *view = SailfishApp::createView();
+
+    QString qml = QString("qml/%1.qml").arg("harbour-qtvnc");
+    view->setSource(SailfishApp::pathTo(qml));
+    view->show();
+
+    return app->exec();
 }
 
